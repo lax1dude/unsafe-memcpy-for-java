@@ -40,7 +40,11 @@ public class UnsafeUtils {
 	public static void loadNatives() {
 		if(!hasLoadedNatives) {
 			hasLoadedNatives = true;
-			System.loadLibrary("UnsafeMemcpy");
+			if(System.getProperty("os.name").toLowerCase().contains("windows")) {
+				System.loadLibrary("UnsafeMemcpy");
+			}else {
+				System.loadLibrary("unsafememcpy");
+			}
 		}
 	}
 
