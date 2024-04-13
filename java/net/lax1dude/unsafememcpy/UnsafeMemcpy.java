@@ -36,326 +36,392 @@ public class UnsafeMemcpy {
 
 	public static native void memcpy(long dstAddress, long srcAddress, int byteLength);
 
-	public static native void memcpy(long dstAddress, long srcAddress, long byteLength);
-
 	public static native void memcpy(Buffer dstAddress, int dstOffset, long srcAddress, int byteLength);
-
-	public static native void memcpy(Buffer dstAddress, long dstOffset, long srcAddress, long byteLength);
 
 	public static native void memcpy(byte[] dstAddress, int dstOffset, long srcAddress, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, long srcAddress, long byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, long srcAddress, int byteLength);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, long srcAddress, int byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, long srcAddress, int length);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, long srcAddress, long byteLength);
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, long srcAddress, int byteLength);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, long srcAddress, int byteLength);
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, long srcAddress, int length);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, long srcAddress, long byteLength);
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, long srcAddress, int byteLength);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, long srcAddress, int byteLength);
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, long srcAddress, int length);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, long srcAddress, long byteLength);
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, long srcAddress, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, long srcAddress, int byteLength);
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, long srcAddress, int length);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, long srcAddress, long byteLength);
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, long srcAddress, int byteLength);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, long srcAddress, int byteLength);
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, long srcAddress, int length);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, long srcAddress, long byteLength);
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, long srcAddress, int byteLength);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, long srcAddress, int byteLength);
-
-	public static native void memcpy(float[] dstAddress, long dstOffset, long srcAddress, long byteLength);
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, long srcAddress, int length);
 
 	public static native void memcpy(long dstAddress, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long dstAddress, Buffer srcAddress, long srcOffset, long byteLength);
-
 	public static native void memcpy(Buffer dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
-
-	public static native void memcpy(Buffer dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
 
 	public static native void memcpy(byte[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int byteLength);
-
-	public static native void memcpy(float[] dstAddress, long dstOffset, Buffer srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, Buffer srcAddress, int srcOffset, int length);
 
 	public static native void memcpy(long dstAddress, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long dstAddress, byte[] srcAddress, long srcOffset, long byteLength);
-
 	public static native void memcpy(Buffer dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
-
-	public static native void memcpy(Buffer dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
 
 	public static native void memcpy(byte[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, byte[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, long dstOffset, byte[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long dstAddress, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long dstAddress, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(long dstAddress, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long dstAddress, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(Buffer dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(Buffer dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(Buffer dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(byte[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(byte[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAligned(short[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(short[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(char[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(int[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(long[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, long dstOffset, short[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long dstAddress, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long dstAddress, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(double[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(float[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, short[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(long dstAddress, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(long dstAddress, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(Buffer dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(Buffer dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(byte[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(byte[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(short[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAligned(char[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, long dstOffset, char[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(char[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long dstAddress, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long dstAddress, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(Buffer dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(int[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(byte[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(long[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(double[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(float[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, char[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long dstAddress, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(long dstAddress, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(Buffer dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(Buffer dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, long dstOffset, int[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(byte[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long dstAddress, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(byte[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long dstAddress, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(Buffer dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(short[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(byte[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(char[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAligned(int[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(int[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(long[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(double[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, long dstOffset, long[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long dstAddress, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(float[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long dstAddress, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, int[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(long dstAddress, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(Buffer dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(long dstAddress, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(byte[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(Buffer dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(Buffer dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(byte[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(byte[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(short[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(char[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(int[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, long dstOffset, double[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long dstAddress, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAligned(long[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long dstAddress, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(long[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(Buffer dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(byte[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(double[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(byte[] dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(short[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(short[] dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignSrc(float[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, long[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(char[] dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(long dstAddress, double[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(int[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(long dstAddress, double[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(int[] dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(Buffer dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(long[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(Buffer dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(long[] dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(byte[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(double[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(byte[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(double[] dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
 
-	public static native void memcpy(float[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+	public static native void memcpyAlignSrc(short[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
 
-	public static native void memcpy(float[] dstAddress, long dstOffset, float[] srcAddress, long srcOffset, long byteLength);
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(char[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(int[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(long[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAligned(double[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignSrc(double[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(float[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, double[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(long dstAddress, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(long dstAddress, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(Buffer dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(Buffer dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(byte[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(byte[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(short[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(short[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(short[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(char[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(char[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(char[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(int[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(int[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(int[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(long[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(long[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(long[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(double[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAlignSrc(double[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(double[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyUnaligned(float[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int byteLength);
+
+	public static native void memcpyAligned(float[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignSrc(float[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
+
+	public static native void memcpyAlignDst(float[] dstAddress, int dstOffset, float[] srcAddress, int srcOffset, int length);
 
 }

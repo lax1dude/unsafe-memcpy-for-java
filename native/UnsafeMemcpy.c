@@ -39,16 +39,6 @@ JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__JJI
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
  * Method:    memcpy
- * Signature: (JJJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_IMPL(dstAddress, srcAddress, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
  * Signature: (Ljava/nio/Buffer;IJI)V
  */
 JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2IJI
@@ -59,151 +49,131 @@ JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
  * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;JJJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
  * Signature: ([BIJI)V
  */
 JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BIJI
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jlong srcAddress, jint byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, byteLength, SetByteArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJJJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SIJI
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SIJI
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jlong srcAddress, jint byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([SIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SIJI
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jlong srcAddress, jint length) {
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, length, SetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CIJI
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CIJI
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jlong srcAddress, jint byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([CIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CIJI
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jlong srcAddress, jint length) {
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, length, SetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([IIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IIJI
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3IIJI
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jlong srcAddress, jint byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([IIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3IIJI
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jlong srcAddress, jint length) {
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, length, SetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JIJI
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JIJI
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jlong srcAddress, jint byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([JIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JIJI
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jlong srcAddress, jint length) {
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, length, SetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DIJI
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DIJI
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jlong srcAddress, jint byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([DIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DIJI
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jlong srcAddress, jint length) {
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, length, SetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FIJI
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FIJI
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jlong srcAddress, jint byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([FIJI)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jlong srcAddress, jlong byteLength) {
-	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FIJI
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jlong srcAddress, jint length) {
+	UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, length, SetFloatArrayRegion);
 }
 
 /*
@@ -213,16 +183,6 @@ JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJJ
  */
 JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__JLjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (JLjava/nio/Buffer;JJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__JLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jobject srcAddress, jlong srcOffset, jlong byteLength) {
 	UNSAFE_MEMCPY_BUFFER_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
 }
 
@@ -239,151 +199,131 @@ JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
  * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;JLjava/nio/Buffer;JJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2JLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
  * Signature: ([BILjava/nio/Buffer;II)V
  */
 JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BILjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, byteLength, SetByteArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJLjava/nio/Buffer;JJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SILjava_nio_Buffer_2II
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SILjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJLjava/nio/Buffer;JJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([SILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SILjava_nio_Buffer_2II
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, length, SetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CILjava_nio_Buffer_2II
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CILjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJLjava/nio/Buffer;JJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([CILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CILjava_nio_Buffer_2II
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, length, SetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([IILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IILjava_nio_Buffer_2II
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3IILjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJLjava/nio/Buffer;JJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([IILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3IILjava_nio_Buffer_2II
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, length, SetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JILjava_nio_Buffer_2II
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JILjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJLjava/nio/Buffer;JJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([JILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JILjava_nio_Buffer_2II
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, length, SetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DILjava_nio_Buffer_2II
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DILjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJLjava/nio/Buffer;JJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([DILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DILjava_nio_Buffer_2II
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, length, SetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FILjava_nio_Buffer_2II
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FILjava_nio_Buffer_2II
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJLjava/nio/Buffer;JJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([FILjava/nio/Buffer;II)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJLjava_nio_Buffer_2JJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jobject srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FILjava_nio_Buffer_2II
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jobject srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, length, SetFloatArrayRegion);
 }
 
 /*
@@ -393,17 +333,7 @@ JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJL
  */
 JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3BII
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (J[BJJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength, GetByteArrayRegion);
 }
 
 /*
@@ -413,17 +343,7 @@ JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3BJ
  */
 JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2I_3BII
   (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;J[BJJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2J_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength, GetByteArrayRegion);
 }
 
 /*
@@ -433,1216 +353,1626 @@ JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava
  */
 JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BI_3BII
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength, GetByteArrayRegion, SetByteArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJ[BJJ)V
- */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJ_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
-}
-
-/*
- * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SI_3BII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SI_3BII
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJ[BJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([SI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJ_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SI_3BII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, length, SetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CI_3BII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CI_3BII
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJ[BJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([CI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJ_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CI_3BII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, length, SetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([II[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3II_3BII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3II_3BII
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJ[BJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([II[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJ_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3II_3BII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, length, SetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JI_3BII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JI_3BII
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJ[BJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([JI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJ_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JI_3BII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, length, SetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DI_3BII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DI_3BII
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJ[BJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([DI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJ_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DI_3BII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, length, SetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FI_3BII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FI_3BII
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJ[BJJ)V
+ * Method:    memcpyAlignDst
+ * Signature: ([FI[BII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJ_3BJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jbyteArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FI_3BII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jbyteArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, length, SetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: (J[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__J_3SII
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (J[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (J[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__J_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: (Ljava/nio/Buffer;I[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2I_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__Ljava_nio_Buffer_2I_3SII
   (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;J[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (Ljava/nio/Buffer;I[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2J_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__Ljava_nio_Buffer_2I_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([BI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BI_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3BI_3SII
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJ[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([BI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJ_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3BI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SI_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SI_3SII
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJ[SJJ)V
+ * Method:    memcpyAligned
+ * Signature: ([SI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJ_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAligned___3SI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion, SetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignSrc
+ * Signature: ([SI[SII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3SI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([SI[SII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, SetShortArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CI_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CI_3SII
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJ[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([CI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJ_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3CI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([CI[SII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, SetCharArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([II[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3II_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3II_3SII
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJ[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([II[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJ_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3II_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([II[SII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3II_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, SetIntArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JI_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JI_3SII
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJ[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([JI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJ_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3JI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([JI[SII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, SetLongArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DI_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DI_3SII
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJ[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([DI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJ_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3DI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([DI[SII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, SetDoubleArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FI_3SII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FI_3SII
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJ[SJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([FI[SII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJ_3SJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jshortArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3FI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, GetShortArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([FI[SII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FI_3SII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jshortArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, length, SetFloatArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: (J[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__J_3CII
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (J[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (J[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__J_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: (Ljava/nio/Buffer;I[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2I_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__Ljava_nio_Buffer_2I_3CII
   (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;J[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (Ljava/nio/Buffer;I[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2J_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__Ljava_nio_Buffer_2I_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([BI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BI_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3BI_3CII
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJ[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([BI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJ_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3BI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SI_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SI_3CII
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJ[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([SI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJ_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3SI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([SI[CII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, SetShortArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CI_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CI_3CII
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJ[CJJ)V
+ * Method:    memcpyAligned
+ * Signature: ([CI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJ_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAligned___3CI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion, SetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignSrc
+ * Signature: ([CI[CII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3CI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([CI[CII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, SetCharArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([II[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3II_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3II_3CII
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJ[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([II[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJ_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3II_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([II[CII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3II_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, SetIntArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JI_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JI_3CII
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJ[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([JI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJ_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3JI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([JI[CII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, SetLongArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DI_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DI_3CII
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJ[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([DI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJ_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3DI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([DI[CII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, SetDoubleArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FI_3CII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FI_3CII
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJ[CJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([FI[CII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJ_3CJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jcharArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3FI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, GetCharArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([FI[CII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FI_3CII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jcharArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, length, SetFloatArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: (J[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__J_3III
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (J[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (J[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__J_3III
+  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: (Ljava/nio/Buffer;I[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2I_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__Ljava_nio_Buffer_2I_3III
   (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;J[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (Ljava/nio/Buffer;I[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2J_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__Ljava_nio_Buffer_2I_3III
+  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([BI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BI_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3BI_3III
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJ[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([BI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJ_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3BI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SI_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SI_3III
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJ[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([SI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJ_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3SI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([SI[III)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, SetShortArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CI_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CI_3III
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJ[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([CI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJ_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3CI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([CI[III)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, SetCharArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([II[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3II_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3II_3III
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJ[IJJ)V
+ * Method:    memcpyAligned
+ * Signature: ([II[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJ_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAligned___3II_3III
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion, SetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignSrc
+ * Signature: ([II[III)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3II_3III
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([II[III)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3II_3III
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, SetIntArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JI_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JI_3III
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJ[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([JI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJ_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3JI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([JI[III)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, SetLongArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DI_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DI_3III
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJ[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([DI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJ_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3DI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([DI[III)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, SetDoubleArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FI_3III
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FI_3III
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJ[IJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([FI[III)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJ_3IJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jintArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3FI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, GetIntArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([FI[III)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FI_3III
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jintArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, length, SetFloatArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: (J[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__J_3JII
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (J[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (J[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__J_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: (Ljava/nio/Buffer;I[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2I_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__Ljava_nio_Buffer_2I_3JII
   (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;J[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (Ljava/nio/Buffer;I[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2J_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__Ljava_nio_Buffer_2I_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([BI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BI_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3BI_3JII
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJ[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([BI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJ_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3BI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SI_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SI_3JII
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJ[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([SI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJ_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3SI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([SI[JII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, SetShortArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CI_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CI_3JII
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJ[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([CI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJ_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3CI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([CI[JII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, SetCharArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([II[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3II_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3II_3JII
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJ[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([II[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJ_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3II_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([II[JII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3II_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, SetIntArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JI_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JI_3JII
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJ[JJJ)V
+ * Method:    memcpyAligned
+ * Signature: ([JI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJ_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAligned___3JI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion, SetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignSrc
+ * Signature: ([JI[JII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3JI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([JI[JII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, SetLongArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DI_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DI_3JII
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJ[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([DI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJ_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3DI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([DI[JII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, SetDoubleArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FI_3JII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FI_3JII
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJ[JJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([FI[JII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJ_3JJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jlongArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3FI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, GetLongArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([FI[JII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FI_3JII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jlongArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, length, SetFloatArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: (J[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__J_3DII
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (J[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (J[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__J_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: (Ljava/nio/Buffer;I[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2I_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__Ljava_nio_Buffer_2I_3DII
   (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;J[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (Ljava/nio/Buffer;I[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2J_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__Ljava_nio_Buffer_2I_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([BI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BI_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3BI_3DII
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJ[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([BI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJ_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3BI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SI_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SI_3DII
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJ[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([SI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJ_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3SI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([SI[DII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, SetShortArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CI_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CI_3DII
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJ[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([CI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJ_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3CI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([CI[DII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, SetCharArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([II[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3II_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3II_3DII
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJ[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([II[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJ_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3II_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([II[DII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3II_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, SetIntArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JI_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JI_3DII
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJ[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([JI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJ_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3JI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([JI[DII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, SetLongArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DI_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DI_3DII
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJ[DJJ)V
+ * Method:    memcpyAligned
+ * Signature: ([DI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJ_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAligned___3DI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion, SetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignSrc
+ * Signature: ([DI[DII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3DI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([DI[DII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, SetDoubleArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FI_3DII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FI_3DII
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJ[DJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([FI[DII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJ_3DJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jdoubleArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3FI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, GetDoubleArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([FI[DII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FI_3DII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jdoubleArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, length, SetFloatArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: (J[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__J_3FII
   (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (J[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (J[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__J_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__J_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jlong dstAddress, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: (Ljava/nio/Buffer;I[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2I_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned__Ljava_nio_Buffer_2I_3FII
   (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: (Ljava/nio/Buffer;J[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: (Ljava/nio/Buffer;I[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy__Ljava_nio_Buffer_2J_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc__Ljava_nio_Buffer_2I_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jobject dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([BI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BI_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3BI_3FII
   (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([BJ[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([BI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3BJ_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3BI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jbyteArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jbyte, GetByteArrayElements, ReleaseByteArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyUnaligned
  * Signature: ([SI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SI_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3SI_3FII
   (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([SJ[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([SI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3SJ_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3SI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([SI[FII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3SI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jshortArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jshort, GetShortArrayElements, ReleaseShortArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, SetShortArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([CI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CI_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3CI_3FII
   (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([CJ[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([CI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3CJ_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3CI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([CI[FII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3CI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jcharArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jchar, GetCharArrayElements, ReleaseCharArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, SetCharArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([II[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3II_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3II_3FII
   (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([IJ[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([II[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3IJ_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3II_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([II[FII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3II_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jintArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jint, GetIntArrayElements, ReleaseIntArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, SetIntArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([JI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JI_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3JI_3FII
   (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([JJ[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([JI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3JJ_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3JI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([JI[FII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3JI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jlongArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jlong, GetLongArrayElements, ReleaseLongArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, SetLongArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([DI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DI_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3DI_3FII
   (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([DJ[FJJ)V
+ * Method:    memcpyAlignSrc
+ * Signature: ([DI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3DJ_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3DI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([DI[FII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3DI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jdoubleArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jdouble, GetDoubleArrayElements, ReleaseDoubleArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, SetDoubleArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyUnaligned
  * Signature: ([FI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FI_3FII
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyUnaligned___3FI_3FII
   (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, byteLength);
 }
 
 /*
  * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
- * Method:    memcpy
- * Signature: ([FJ[FJJ)V
+ * Method:    memcpyAligned
+ * Signature: ([FI[FII)V
  */
-JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpy___3FJ_3FJJ
-  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jlong dstOffset, jfloatArray srcAddress, jlong srcOffset, jlong byteLength) {
-	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength);
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAligned___3FI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion, SetFloatArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyAlignSrc
+ * Signature: ([FI[FII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignSrc___3FI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, GetFloatArrayRegion);
+}
+
+/*
+ * Class:     net_lax1dude_unsafememcpy_UnsafeMemcpy
+ * Method:    memcpyAlignDst
+ * Signature: ([FI[FII)V
+ */
+JNIEXPORT void JNICALL Java_net_lax1dude_unsafememcpy_UnsafeMemcpy_memcpyAlignDst___3FI_3FII
+  (JNIEnv * jniHandle, jclass jniClass, jfloatArray dstAddress, jint dstOffset, jfloatArray srcAddress, jint srcOffset, jint length) {
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, srcAddress, srcOffset, jfloat, GetFloatArrayElements, ReleaseFloatArrayElements, length, SetFloatArrayRegion);
 }
 

@@ -32,9 +32,12 @@
 
 #include "utils.h"
 
+
+// =============== UNALIGNED VERSIONS ===============
+
 #define UNSAFE_MEMCPY_IMPL(dst, src, len) memcpy((void*)(dst), (const void*)(src), (size_t)(len))
 
-#define UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, byteLength)\
+#define UNSAFE_MEMCPY_ARRAY_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, byteLength)\
 	uint64_t srcArray = (uint64_t)(*jniHandle)->GetPrimitiveArrayCritical(jniHandle, srcAddress, NULL);\
 	if(!srcArray) {\
 		unsafeThrowOutOfMemory(jniHandle);\
@@ -72,7 +75,7 @@
 	}\
 	UNSAFE_MEMCPY_IMPL(dstBuffer + dstOffset, srcBuffer + srcOffset, byteLength);
 
-#define UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength)\
+#define UNSAFE_MEMCPY_ARRAY_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, byteLength)\
 	uint64_t dstBuffer = (uint64_t)(*jniHandle)->GetDirectBufferAddress(jniHandle, dstAddress);\
 	if(!dstBuffer) {\
 		unsafeThrowNotDirectBuffer(jniHandle);\
@@ -86,7 +89,7 @@
 	UNSAFE_MEMCPY_IMPL(dstBuffer + dstOffset, srcArray + srcOffset, byteLength);\
 	(*jniHandle)->ReleasePrimitiveArrayCritical(jniHandle, srcAddress, (void*)srcArray, JNI_ABORT);
 
-#define UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, byteLength)\
+#define UNSAFE_MEMCPY_NATIVE_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, byteLength)\
 	uint64_t dstArray = (uint64_t)(*jniHandle)->GetPrimitiveArrayCritical(jniHandle, dstAddress, NULL);\
 	if(!dstArray) {\
 		unsafeThrowOutOfMemory(jniHandle);\
@@ -95,7 +98,7 @@
 	UNSAFE_MEMCPY_IMPL(dstArray + dstOffset, srcAddress, byteLength);\
 	(*jniHandle)->ReleasePrimitiveArrayCritical(jniHandle, dstAddress, (void*)dstArray, JNI_COMMIT);
 
-#define UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength)\
+#define UNSAFE_MEMCPY_BUFFER_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, srcOffset, byteLength)\
 	uint64_t srcBuffer = (uint64_t)(*jniHandle)->GetDirectBufferAddress(jniHandle, srcAddress);\
 	if(!srcBuffer) {\
 		unsafeThrowNotDirectBuffer(jniHandle);\
@@ -109,7 +112,7 @@
 	UNSAFE_MEMCPY_IMPL(dstArray + dstOffset, srcBuffer + srcOffset, byteLength);\
 	(*jniHandle)->ReleasePrimitiveArrayCritical(jniHandle, dstAddress, (void*)dstArray, JNI_COMMIT);
 
-#define UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, byteLength)\
+#define UNSAFE_MEMCPY_ARRAY_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, byteLength)\
 	uint64_t srcArray = (uint64_t)(*jniHandle)->GetPrimitiveArrayCritical(jniHandle, srcAddress, NULL);\
 	if(!srcArray) {\
 		unsafeThrowOutOfMemory(jniHandle);\
@@ -124,3 +127,58 @@
 	UNSAFE_MEMCPY_IMPL(dstArray + dstOffset, srcArray + srcOffset, byteLength);\
 	(*jniHandle)->ReleasePrimitiveArrayCritical(jniHandle, dstAddress, (void*)dstArray, JNI_COMMIT);\
 	(*jniHandle)->ReleasePrimitiveArrayCritical(jniHandle, srcAddress, (void*)srcArray, JNI_ABORT);
+
+
+
+// =============== ALIGNED SRC VERSIONS ===============
+
+#define UNSAFE_MEMCPY_ARRAY_ALIGN_TO_NATIVE_IMPL(jniHandle, dstAddress, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, length, srcGetRegionFunction)\
+	(*jniHandle)->srcGetRegionFunction(jniHandle, srcAddress, srcOffset, length, (srcType*)dstAddress);
+
+#define UNSAFE_MEMCPY_ARRAY_ALIGN_TO_BUFFER_IMPL(jniHandle, dstAddress, dstOffset, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, length, srcGetRegionFunction)\
+	uint64_t dstBuffer = (uint64_t)(*jniHandle)->GetDirectBufferAddress(jniHandle, dstAddress);\
+	if(!dstBuffer) {\
+		unsafeThrowNotDirectBuffer(jniHandle);\
+		return;\
+	}\
+	(*jniHandle)->srcGetRegionFunction(jniHandle, srcAddress, srcOffset, length, (srcType*)(dstBuffer + dstOffset));
+
+#define UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, length, srcGetRegionFunction)\
+	uint64_t dstArray = (uint64_t)(*jniHandle)->dstGetElements(jniHandle, dstAddress, NULL);\
+	if(!dstArray) {\
+		unsafeThrowOutOfMemory(jniHandle);\
+		return;\
+	}\
+	(*jniHandle)->srcGetRegionFunction(jniHandle, srcAddress, srcOffset, length, (srcType*)(dstArray + dstOffset));\
+	(*jniHandle)->dstReleaseElements(jniHandle, dstAddress, (dstType*)dstArray, JNI_COMMIT);\
+
+
+
+// =============== ALIGNED DST VERSIONS ===============
+
+#define UNSAFE_MEMCPY_NATIVE_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, length, dstSetRegionFunction)\
+	(*jniHandle)->dstSetRegionFunction(jniHandle, dstAddress, dstOffset, length, (const dstType*)srcAddress);
+
+#define UNSAFE_MEMCPY_BUFFER_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, srcOffset, length, dstSetRegionFunction)\
+	uint64_t srcBuffer = (uint64_t)(*jniHandle)->GetDirectBufferAddress(jniHandle, srcAddress);\
+	if(!srcBuffer) {\
+		unsafeThrowNotDirectBuffer(jniHandle);\
+		return;\
+	}\
+	(*jniHandle)->dstSetRegionFunction(jniHandle, dstAddress, dstOffset, length, (const dstType*)(srcBuffer + srcOffset));
+
+#define UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, length, dstSetRegionFunction)\
+	uint64_t srcArray = (uint64_t)(*jniHandle)->srcGetElements(jniHandle, srcAddress, NULL);\
+	if(!srcArray) {\
+		unsafeThrowOutOfMemory(jniHandle);\
+		return;\
+	}\
+	(*jniHandle)->dstSetRegionFunction(jniHandle, dstAddress, dstOffset, length, (const dstType*)(srcArray + srcOffset));\
+	(*jniHandle)->srcReleaseElements(jniHandle, srcAddress, (void*)srcArray, JNI_ABORT);
+
+
+
+// =============== FULLY ALIGNED VERSIONS ===============
+
+#define UNSAFE_MEMCPY_ARRAY_ALIGN_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, srcOffset, srcType, srcGetElements, srcReleaseElements, length, srcGetRegionFunction, dstSetRegionFunction)\
+	UNSAFE_MEMCPY_ARRAY_TO_ARRAY_ALIGN_IMPL(jniHandle, dstAddress, dstOffset, dstType, dstGetElements, dstReleaseElements, srcAddress, (srcOffset * (jsize)sizeof(srcType)), srcType, srcGetElements, srcReleaseElements, length, dstSetRegionFunction)

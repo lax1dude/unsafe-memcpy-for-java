@@ -45,6 +45,11 @@ public class UnsafeUtils {
 			}else {
 				System.loadLibrary("unsafememcpy");
 			}
+			int major = getVersionMajor();
+			int minor = getVersionMinor();
+			if(major != 1 || minor < 0) {
+				throw new UnsatisfiedLinkError("Invalid UnsafeMemcpy native library version: " + major + "." + minor + " (expected: 1.0)");
+			}
 		}
 	}
 
